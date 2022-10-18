@@ -5,17 +5,15 @@ import Form from '../pages/Form';
 import ListPage from '../pages/ListPage';
 import DetailPage from '../pages/DetailPage';
 
-const Router = () => {
-    return (
+const Router = () => 
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Form" element={<Form />} />
           <Route path="/ListPage" element={<ListPage />} />
-          <Route path="/DetailPage" element={<DetailPage />} />
+          <Route path="/DetailPage/:id" element={<DetailPage />} />
         </Routes>
       </BrowserRouter>
-    );
-  };
-  
-  export default Router;
+
+export default Router;

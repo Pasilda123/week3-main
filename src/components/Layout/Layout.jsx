@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
-import Container from "@mui/material/Container";
+import { createGlobalStyle } from 'styled-components';
+import Container from '@mui/material/Container';
 
 // 레이아웃
 const Layout = ({ children }) => {
@@ -11,14 +11,12 @@ const Layout = ({ children }) => {
   }
 `;
 
-  return (
-    <Container fixed>
-      <StyleLayout>
-        <GlobalStyle />
-        {children}
+  return <Container fixed>
+  <StyleLayout>
+          <GlobalStyle/>
+          {children}
       </StyleLayout>
-    </Container>
-  );
+      </Container>;
 };
 
 export default Layout;

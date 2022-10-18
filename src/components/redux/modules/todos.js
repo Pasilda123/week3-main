@@ -30,7 +30,7 @@ export const addTodo = (payload) => {
   // initial State
   const initialState = {
     todos: [
-      { id: 1, name:"A", title: "와이어프레임 만들기", content: "ABC", done: true },
+      { id: 1, name:"A", title: "와이어프레임 만들기가나다라마바사아자차카타파하하하하하", content: "ABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCD", done: true },
       { id: 2, name:"B", title: "롤 부여하기", content: "ABC", done: true },
       { id: 3, name:"C", title: "VSCODE 설치", content: "ABC", done: false },
       { id: 4, name:"D", title: "yarn create react-app week3", content: "ABC", done: false },
@@ -75,9 +75,7 @@ export const addTodo = (payload) => {
         return {
           ...state,
           todo: state.todos.find((todo) => {
-            // 배열 요소 순차순회하며 조건에 일치하는 값 반환
             return todo.id === action.payload;
-            // todo id를 비교해서 맞는걸 리턴
           }),
         };
   

@@ -2,14 +2,14 @@ import React from "react";
 import styled, { css } from "styled-components";
 import Layout from "../Layout/Layout";
 import Header from "../Layout/Header";
+import Clock from "react-live-clock";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo, editTodo } from "../redux/modules/todos";
-import { useNavigate } from "react-router-dom";
-import { FaTrash } from "react-icons/fa";
-import { GoCommentDiscussion } from "react-icons/go";
 import Button from "@mui/material/Button";
 import { MdDone } from "react-icons/md";
-import Clock from "react-live-clock";
+import { GoCommentDiscussion } from "react-icons/go";
+import { FaTrash } from "react-icons/fa";
+import { removeTodo, editTodo } from "../redux/modules/todos";
+import { useNavigate } from "react-router-dom";
 
 // 할 일 목록
 const ListPage = () => {
@@ -17,7 +17,7 @@ const ListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //Day
+  // Day
   const Week = [
     "Sun / 일요일",
     "Mon / 월요일",
@@ -30,8 +30,11 @@ const ListPage = () => {
   const Today = new Date().getDay();
   const PrintToday = Week[Today];
 
-  //남은 할 일
-  const Remainingtodo = todos.filter((todo) => !todo.done);
+  // 남은 할 일
+  const Remainingtodo = todos.filter((todo) => !todo.done); 
+    if(Remainingtodo.length < 4) {
+      return window.alert("얼마 남지 않았어요!")
+    }
 
   const DeleteTodo = (id) => {
     dispatch(removeTodo(id));
@@ -40,6 +43,8 @@ const ListPage = () => {
   const ToggleTodo = (id) => {
     dispatch(editTodo(id));
   };
+
+
 
   return (
     <Layout>
@@ -86,7 +91,7 @@ const ListPage = () => {
                     cursor: "pointer",
                   }}
                   onClick={() => {
-                    navigate("/DetailPage");
+                    navigate(`/DetailPage/${todo.id}`);
                   }}
                 >
                   동료 피드백
@@ -114,6 +119,7 @@ const ListPage = () => {
     </Layout>
   );
 };
+
 export default ListPage;
 
 const StyleListPage = styled.div``;
@@ -167,7 +173,7 @@ const StyleTodoContainer = styled.div`
     border-radius: 10px;
     background: #ccc;
   }
-`;
+`;                                                                                                                                                        
 
 const StylingList = styled.div`
   margin: 20px;

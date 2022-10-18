@@ -3,24 +3,17 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelopeOpenText } from "react-icons/fa";
 
+
 // 헤더
 const Header = () => {
-  const navigate = useNavigate();
-  return (
-    <StyleHeader>
-      <Button
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        <FaEnvelopeOpenText />
-        Home
-      </Button>
-      <Title>My Todo List</Title>
-    </StyleHeader>
-  );
-};
+    const navigate = useNavigate();
+    return (
+        <StyleHeader>
+            <Button style={{cursor:"pointer"}}onClick={() => {navigate("/")}}><FaEnvelopeOpenText/>Home</Button>
+        <Title>My Todo List</Title>
+        </StyleHeader>
+    );
+    };
 
 export default Header;
 
@@ -39,13 +32,15 @@ const StyleHeader = styled.div`
 
 const Button = styled.button`
   background-color: white;
-  border: none;
-  color: #20c997;
+  border:none;
+  color:#20c997;
   font-size: 18px;
 `;
 
 const Title = styled.div`
-  color: #20c997;
+  color:#20c997;
   font-size: 18px;
   margin-bottom: 7px;
 `;
+
+
