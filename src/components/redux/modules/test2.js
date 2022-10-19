@@ -2,10 +2,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  number: 0,
+  number: 0, // 액션밸류, 액션크리에이터 생략
 };
 
-const counterSlice = createSlice({
+const counterSlice = createSlice({ // 리듀서가 통합
   name: "counter",
   initialState,
   reducers: {

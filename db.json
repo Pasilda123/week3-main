@@ -2,7 +2,10 @@
   "todos": [
     {
       "id": "1",
-      "title": "react"
+      "name": "minki",
+      "title": "와이어 프레임만들기",
+      "content":  "와이어 프레임 피그마로 만들고 캡쳐",
+      "done": false
     }
   ]
 }

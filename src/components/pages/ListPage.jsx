@@ -3,13 +3,14 @@ import styled, { css } from "styled-components";
 import Layout from "../Layout/Layout";
 import Header from "../Layout/Header";
 import Clock from "react-live-clock";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { MdDone } from "react-icons/md";
 import { GoCommentDiscussion } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
-import { removeTodo, editTodo } from "../redux/modules/todos";
 import { useNavigate } from "react-router-dom";
+import { removeTodo, editTodo } from '../redux/modules/todosSlice';
+
 
 // 할 일 목록
 const ListPage = () => {
@@ -31,10 +32,31 @@ const ListPage = () => {
   const PrintToday = Week[Today];
 
   // 남은 할 일
-  const Remainingtodo = todos.filter((todo) => !todo.done); 
-    if(Remainingtodo.length < 4) {
-      return window.alert("얼마 남지 않았어요!")
+  const Remainingtodo = todos.filter((todo) => !todo.done); /* {
+    if(Remainingtodo.length < 1) {
+      return (
+        <Layout>
+      <StyleListPage>
+        <Header />
+        <H1>
+          <Clock
+            format={"YYYY.MM.DD"}
+            ticking={false}
+            timezone={"KR/Pacific"}
+          />
+        </H1>
+        <Day>{PrintToday}</Day>
+        <Remaining>
+          <div style={{margin:"180px"}}>
+          <h2>Your Todo</h2>
+          <h4 style={{marginLeft:"30px"}}>Is Empty</h4>
+          </div>
+          </Remaining>
+        </StyleListPage>
+        </Layout>
+      )
     }
+  } */
 
   const DeleteTodo = (id) => {
     dispatch(removeTodo(id));
@@ -43,8 +65,6 @@ const ListPage = () => {
   const ToggleTodo = (id) => {
     dispatch(editTodo(id));
   };
-
-
 
   return (
     <Layout>
@@ -65,12 +85,7 @@ const ListPage = () => {
             return (
               <StylingList key={todo.id}>
                 <div>
-                  <Circle
-                    done={todo.done}
-                    onClick={() => {
-                      ToggleTodo(todo.id);
-                    }}
-                  >
+                  <Circle done={todo.done} onClick={() => {ToggleTodo(todo.id)}}>
                     {todo.done ? (
                       <MdDone />
                     ) : (
@@ -104,9 +119,7 @@ const ListPage = () => {
                     color: "#20c997",
                     cursor: "pointer",
                   }}
-                  onClick={() => {
-                    DeleteTodo(todo.id);
-                  }}
+                  onClick={() => DeleteTodo(todo.id)}
                 >
                   삭제
                   <FaTrash />
@@ -173,7 +186,7 @@ const StyleTodoContainer = styled.div`
     border-radius: 10px;
     background: #ccc;
   }
-`;                                                                                                                                                        
+`;
 
 const StylingList = styled.div`
   margin: 20px;
