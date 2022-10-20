@@ -6824,12 +6824,7 @@ moment-timezone@^0.5.38:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0":
-  version "2.29.4"
-  resolved "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz"
-  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
-
-moment@^2.29.4:
+"moment@>= 2.9.0", moment@^2.29.4:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -8130,7 +8125,7 @@ react-is@^18.0.0, react-is@^18.2.0:
 
 react-live-clock@^6.0.6:
   version "6.0.6"
-  resolved "https://registry.npmjs.org/react-live-clock/-/react-live-clock-6.0.6.tgz"
+  resolved "https://registry.yarnpkg.com/react-live-clock/-/react-live-clock-6.0.6.tgz#600fe367b026337eecf77649beb076ab53131363"
   integrity sha512-UDRz8c+eOqxeplcsK6FSHx7OAmnLKS0/R4sfJsxaSNvZ3QkEL8si9Zi41muc6To8LsVerV1WV/FynYkgBXIWFg==
 
 react-redux@^8.0.4:
