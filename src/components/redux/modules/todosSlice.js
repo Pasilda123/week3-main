@@ -12,13 +12,12 @@ const initialState = {
   ],
 };
 
-
 const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.todos.push(action.payload)
+      state.todos.push(action.payload);
     },
 
     removeTodo: (state, action) => {
@@ -45,4 +44,3 @@ const todosSlice = createSlice({
 
 export const { addTodo, removeTodo, editTodo, getId } = todosSlice.actions;
 export default todosSlice.reducer;
-

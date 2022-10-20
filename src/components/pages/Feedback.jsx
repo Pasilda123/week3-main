@@ -6,14 +6,13 @@ import { addFeedback, removeFeedback } from "../redux/modules/feedbackSlice";
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import { MdPlaylistAdd } from "react-icons/md";
-import Button from "@mui/material/Button";
-import { GoCommentDiscussion } from "react-icons/go";
-import { FaTrash } from "react-icons/fa";
+import Feedbackfix from './Feedbackfix';
+
 
 const FeedbackList = ({ todoId }) => {
   const dispatch = useDispatch();
   const { feedbacks } = useSelector((state) => state.feedback);
-  const feed = feedbacks.filter((feed) => feed.todoId === +todoId);
+  feedbacks.filter((feed) => feed.todoId == todoId);
 
   const [input, setInput] = useState({
     id: Date.now(),
@@ -28,16 +27,13 @@ const FeedbackList = ({ todoId }) => {
 
   const onCreate = (e) => {
     e.preventDefault();
-    if (input.name === "" || input.feedback === "") {
+    if (input.name == "" || input.feedback == "") {
       return window.alert("모두 입력해주세요!");
     }
     dispatch(addFeedback({ ...input, todoId }));
-    setInput({ name: "", feedback: "" });
+    setInput({ id:Date.now(), name: "", feedback: "" });
   };
 
-  const _DeleteTodo = (id) => {
-    dispatch(removeFeedback(id));
-  };
 
   return (
     <StyleFeedbackGroup>
@@ -51,6 +47,7 @@ const FeedbackList = ({ todoId }) => {
           type="text"
           name="name"
           onChange={onChange}
+          value={input.name}
           placeholder="10자 이내 입력"
           multiline
         />
@@ -63,6 +60,7 @@ const FeedbackList = ({ todoId }) => {
           type="text"
           name="feedback"
           onChange={onChange}
+          value={input.feedback}
           placeholder="20자 이내 입력"
           multiline
         />
@@ -72,44 +70,12 @@ const FeedbackList = ({ todoId }) => {
       </InputContainer>
       <StyleContainer>
         {feedbacks
-          .filter((feed) => feed.todoId == +todoId)
-          .map((feed) => {
+          .filter((feed) => feed.todoId === todoId)
+          .map((feed, idx) => {
             return (
-              <div key={feed.id}>
+              <div key={idx}>
                 <FeedbackContainer>
-                  <div style={{ marginLeft: "25px" }}>작성자 : {feed.name}</div>
-                  <div style={{ marginLeft: "25px" }}>
-                    피드백 : {feed.feedback}
-                  </div>
-                  <Line />
-                  <div style={{ marginTop: "-15px" }}>
-                    <Button
-                      style={{
-                        marginLeft: "25px",
-                        width: "215px",
-                        color: "#20c997",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {" "}
-                      수정
-                      <GoCommentDiscussion />
-                    </Button>
-                    <Button
-                      style={{
-                        width: "210px",
-                        color: "#20c997",
-                        cursor: "pointer",
-                      }}
-                    >
-                      삭제
-                      <FaTrash
-                        onClick={() => {
-                          _DeleteTodo(feed.id);
-                        }}
-                      />
-                    </Button>
-                  </div>
+                  <Feedbackfix feed={feed}/>
                 </FeedbackContainer>
               </div>
             );
@@ -165,8 +131,4 @@ const FeedbackContainer = styled.div`
   padding: 10px;
 `;
 
-const Line = styled.div`
-  margin: 25px;
-  margin-top: 1px;
-  border-bottom: 1px solid #e9ecef;
-`;
+

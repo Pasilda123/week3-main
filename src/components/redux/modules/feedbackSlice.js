@@ -2,12 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   feedbacks: [
-    { 
-      todoId:0,
-      id: 0,
-      name:"",
-      feedback: "",
-    },
   ],
 };
 
@@ -16,13 +10,16 @@ const feedbackSlice = createSlice({
     initialState,
     reducers: {
         addFeedback: (state, action) => {
-            console.log(action);
             state.feedbacks.push(action.payload)
         },
 
         removeFeedback: (state, action) => {
-            state.feedbacks.filter((feedback) => feedback.id !== action.payload);
+            console.log(action)
+            state.feedbacks = state.feedbacks.filter((feedback) => feedback.todoId !== action.payload);
+            console.log(state.feedbacks)
         },
+
+        
     }
 })
 
