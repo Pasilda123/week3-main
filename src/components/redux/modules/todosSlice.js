@@ -42,40 +42,7 @@ const todosSlice = createSlice({
     },
   },
 });
-console.log(todosSlice);
+
 export const { addTodo, removeTodo, editTodo, getId } = todosSlice.actions;
 export default todosSlice.reducer;
 
-// switch (action.type) {
-//   case ADD_TODO:
-//     return { ...state, todos: [...state.todos, action.payload] };
-
-//   case REMOVE_TODO:
-//     return {
-//       ...state,
-//       todos: state.todos.filter((todo) => todo.id !== action.payload),
-//     };
-
-//   case EDIT_TODO:
-//     return {
-//       ...state,
-//       todos: state.todos.map((todo) => {
-//         if (todo.id === action.payload) {
-//           return { ...todo, done: !todo.done };
-//         } else {
-//           return todo;
-//         }
-//       }),
-//     };
-
-//   case DETAIL_MATCHING_ID:
-//     return {
-//       ...state,
-//   todo: state.todos.find((todo) => {
-//     return todo.id === action.payload;
-//   }),
-// };
-
-//   default:
-//     return state;
-// }

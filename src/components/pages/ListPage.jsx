@@ -32,31 +32,7 @@ const ListPage = () => {
   const PrintToday = Week[Today];
 
   // 남은 할 일
-  const Remainingtodo = todos.filter((todo) => !todo.done); /* {
-    if(Remainingtodo.length < 1) {
-      return (
-        <Layout>
-      <StyleListPage>
-        <Header />
-        <H1>
-          <Clock
-            format={"YYYY.MM.DD"}
-            ticking={false}
-            timezone={"KR/Pacific"}
-          />
-        </H1>
-        <Day>{PrintToday}</Day>
-        <Remaining>
-          <div style={{margin:"180px"}}>
-          <h2>Your Todo</h2>
-          <h4 style={{marginLeft:"30px"}}>Is Empty</h4>
-          </div>
-          </Remaining>
-        </StyleListPage>
-        </Layout>
-      )
-    }
-  } */
+  const Remainingtodo = todos.filter((todo) => !todo.done);
 
   const DeleteTodo = (id) => {
     dispatch(removeTodo(id));
@@ -98,32 +74,8 @@ const ListPage = () => {
                   <Content>작성자 : {todo.name}</Content>
                 </div>
                 <Line2 />
-                <Button
-                  style={{
-                    marginTop: "10px",
-                    width: "245px",
-                    color: "#20c997",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    navigate(`/DetailPage/${todo.id}`);
-                  }}
-                >
-                  동료 피드백
-                  <GoCommentDiscussion />
-                </Button>
-                <Button
-                  style={{
-                    marginTop: "10px",
-                    width: "245px",
-                    color: "#20c997",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => DeleteTodo(todo.id)}
-                >
-                  삭제
-                  <FaTrash />
-                </Button>
+                <Button style={{ marginTop: "10px", width: "245px", color: "#20c997", cursor: "pointer", }} onClick={() => {navigate(`/DetailPage/${todo.id}`);}}>동료 피드백<GoCommentDiscussion /></Button>
+                <Button style={{ marginTop: "10px", width: "245px", color: "#20c997", cursor: "pointer", }} onClick={() => DeleteTodo(todo.id)}>삭제<FaTrash /></Button>
               </StylingList>
             );
           })}
@@ -161,18 +113,6 @@ const Remaining = styled.div`
 const Line = styled.div`
   border-bottom: 1px solid #e9ecef;
 `;
-
-// const FixButton = styled.button`
-//     border:none;
-//     background-color: white;
-
-// `;
-
-// const RemoveButton = styled.button`
-//     border:none;
-//     background-color: white;
-
-// `;
 
 const StyleTodoContainer = styled.div`
   height: 450px;

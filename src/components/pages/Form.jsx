@@ -9,7 +9,6 @@ import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import { addTodo } from "../redux/modules/todosSlice";
 
-
 // 작성 페이지
 const Form = () => {
 
@@ -24,7 +23,6 @@ const Form = () => {
     done:false,
   });
 
-  
   const onChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
@@ -47,7 +45,6 @@ const Form = () => {
     setInput({ name: "", title: "", content: "" });
     navigate("/ListPage");
   };
-  
 
   return (
     <Layout>
@@ -114,9 +111,8 @@ const Form = () => {
             width: "100px",
             height: "100px",
             padding: "20px",
-            margin: "10px",
-            marginTop: "40px",
-            marginLeft: "220px",
+            marginTop: "10%",
+            marginLeft: "40%",
           }}
           color="success"
           aria-label="add"
