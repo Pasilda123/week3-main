@@ -3,14 +3,15 @@ import styled, { css } from "styled-components";
 import Layout from "../Layout/Layout";
 import Header from "../Layout/Header";
 import Clock from "react-live-clock";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { MdDone } from "react-icons/md";
 import { GoCommentDiscussion } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { removeTodo, editTodo } from '../redux/modules/todosSlice';
-
+import { removeTodo, editTodo } from "../redux/modules/todosSlice";
+import moment from "moment";
+import "moment/locale/ko";
 
 // 할 일 목록
 const ListPage = () => {
@@ -61,7 +62,12 @@ const ListPage = () => {
             return (
               <StylingList key={todo.id}>
                 <div>
-                  <Circle done={todo.done} onClick={() => {ToggleTodo(todo.id)}}>
+                  <Circle
+                    done={todo.done}
+                    onClick={() => {
+                      ToggleTodo(todo.id);
+                    }}
+                  >
                     {todo.done ? (
                       <MdDone />
                     ) : (
@@ -74,8 +80,32 @@ const ListPage = () => {
                   <Content>작성자 : {todo.name}</Content>
                 </div>
                 <Line2 />
-                <Button style={{ marginTop: "10px", width: "245px", color: "#20c997", cursor: "pointer", }} onClick={() => {navigate(`/DetailPage/${todo.id}`);}}>동료 피드백<GoCommentDiscussion /></Button>
-                <Button style={{ marginTop: "10px", width: "245px", color: "#20c997", cursor: "pointer", }} onClick={() => DeleteTodo(todo.id)}>삭제<FaTrash /></Button>
+                <Button
+                  style={{
+                    marginTop: "10px",
+                    width: "245px",
+                    color: "#20c997",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    navigate(`/DetailPage/${todo.id}`);
+                  }}
+                >
+                  동료 피드백
+                  <GoCommentDiscussion />
+                </Button>
+                <Button
+                  style={{
+                    marginTop: "10px",
+                    width: "245px",
+                    color: "#20c997",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => DeleteTodo(todo.id)}
+                >
+                  삭제
+                  <FaTrash />
+                </Button>
               </StylingList>
             );
           })}
