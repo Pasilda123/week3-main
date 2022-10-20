@@ -1,38 +1,128 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Layout from '../Layout/Layout';
-import Header from '../Layout/Header';
-import { Link } from "react-router-dom";
-
+import Layout from "../Layout/Layout";
+import Header from "../Layout/Header";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import AddIcon from "@mui/icons-material/Add";
+import Fab from "@mui/material/Fab";
+import { addTodo } from "../redux/modules/todosSlice";
 
 // 작성 페이지
-
 const Form = () => {
-    
-    return (
-        <Layout>
-        <StyleForm> 
-        <Header/>
-        <Title>여기는 작성페이지입니다</Title>
-        <RedirectHome to="/">Home</RedirectHome>
-        </StyleForm>   
-        </Layout>
-    );
-}           
-            /* 이름,제목,내용같은 인풋값을 다 넣고 
-            제출과 동시에 할 일 목록 리다이렉트 */
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const [input, setInput] = useState({
+    id:Date.now(),
+    name: "",
+    title: "",
+    content: "",
+    done:false,
+  });
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+
+  const onCreate = (e) => {
+    e.preventDefault();
+    if (input.name === "") {
+      return window.alert("이름을 입력해주세요!");
+    } else if (input.title === "") {
+      return window.alert("제목과 내용을 입력해주세요!");
+    } else if (
+      input.name === "" ||
+      input.title === "" ||
+      input.content === ""
+    ) {
+      return window.alert("모든 항목을 기입해주셔야 합니다!");
+    }
+    dispatch(addTodo({ ...input }));
+    setInput({ name: "", title: "", content: "" });
+    navigate("/ListPage");
+  };
+
+  return (
+    <Layout>
+      <StyleForm>
+        <Header />
+        <TextField
+          inputProps={{ maxLength: "10" }}
+          style={{
+            width: "90%",
+            marginLeft: "5.25%",
+            marginTop: "25px",
+            marginBottom: "25px",
+          }}
+          fullWidth
+          color="success"
+          label="작성자"
+          id="fullWidth"
+          type="text"
+          name="name"
+          value={input.name}
+          onChange={onChange}
+          placeholder="이름을 10자 이내로 입력해주세요."
+        />
+        <TextField
+          inputProps={{ maxLength: "28" }}
+          style={{
+            width: "90%",
+            marginLeft: "5.25%",
+            marginTop: "25px",
+            marginBottom: "25px",
+          }}
+          fullWidth
+          color="success"
+          label="제목"
+          id="fullWidth"
+          type="text"
+          name="title"
+          value={input.title}
+          onChange={onChange}
+          placeholder="제목을 28자 이내로 입력해주세요."
+        />
+        <TextField
+          inputProps={{ maxLength: "200" }}
+          style={{
+            width: "90%",
+            marginLeft: "5.25%",
+            marginTop: "25px",
+            marginBottom: "25px",
+          }}
+          color="success"
+          id="outlined-multiline-static"
+          label="내용"
+          type="text"
+          name="content"
+          multiline
+          rows={4}
+          value={input.content}
+          onChange={onChange}
+          placeholder="제목을 200자 이내로 입력해주세요."
+        />
+        <Fab
+          size="100px"
+          style={{
+            width: "100px",
+            height: "100px",
+            padding: "20px",
+            marginTop: "10%",
+            marginLeft: "40%",
+          }}
+          color="success"
+          aria-label="add"
+        >
+          <AddIcon onClick={onCreate} />
+        </Fab>
+      </StyleForm>
+    </Layout>
+  );
+};
 export default Form;
 
-const StyleForm = styled.div`
-`;
-
-const Title = styled.div`
-margin:10px;
-`;
-
-const RedirectHome = styled(Link)`
-margin:10px;
-`;
-
-
+const StyleForm = styled.form``;

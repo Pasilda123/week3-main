@@ -5,16 +5,12 @@ import Homenavigate from '../Home/Homenavigate';
 
 
 // 초기화면
-
-const Home = () => {
+const Home = () => 
     
-    return (
       <Layout>
         <Header />
         <Homenavigate />
       </Layout>
-    );
-  };
 
 export default Home;
 
