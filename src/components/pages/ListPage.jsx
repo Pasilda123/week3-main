@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import Layout from "../Layout/Layout";
 import Header from "../Layout/Header";
@@ -9,9 +9,8 @@ import { MdDone } from "react-icons/md";
 import { GoCommentDiscussion } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { removeTodo, editTodo } from "../redux/modules/todosSlice";
-import moment from "moment";
-import "moment/locale/ko";
+import { readTodos, removeTodo, editTodo } from '../redux/modules/todosSlice';
+
 
 // 할 일 목록
 const ListPage = () => {
@@ -42,6 +41,10 @@ const ListPage = () => {
   const ToggleTodo = (id) => {
     dispatch(editTodo(id));
   };
+
+  useEffect(()=>{
+    dispatch(readTodos())
+  }, [dispatch])
 
   return (
     <Layout>
