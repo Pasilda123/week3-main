@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addFeedback, removeFeedback } from "../redux/modules/feedbackSlice";
+import { addFeedback, readFeedbacks } from "../redux/modules/feedbackSlice";
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import { MdPlaylistAdd } from "react-icons/md";
@@ -11,8 +11,11 @@ import Feedbackfix from './Feedbackfix';
 
 const FeedbackList = ({ todoId }) => {
   const dispatch = useDispatch();
-  const { feedbacks } = useSelector((state) => state.feedback);
-  feedbacks.filter((feed) => feed.todoId == todoId);
+  const { feedbacks } = useSelector((state) => state.feedbacks);
+  console.log(feedbacks);
+  useEffect(()=>{
+    dispatch(readFeedbacks())
+  }, [dispatch])
 
   const [input, setInput] = useState({
     id: Date.now(),
@@ -56,7 +59,7 @@ const FeedbackList = ({ todoId }) => {
           inputProps={{ maxLength: "20" }}
           color="success"
           id="outlined-textarea"
-          label="내용"
+          label="피드백"
           type="text"
           name="feedback"
           onChange={onChange}
@@ -70,10 +73,10 @@ const FeedbackList = ({ todoId }) => {
       </InputContainer>
       <StyleContainer>
         {feedbacks
-          .filter((feed) => feed.todoId === todoId)
-          .map((feed, idx) => {
+          ?.filter((feed) => feed.todoId === +todoId)
+          ?.map((feed) => {
             return (
-              <div key={idx}>
+              <div key={feed.id}>
                 <FeedbackContainer>
                   <Feedbackfix feed={feed}/>
                 </FeedbackContainer>
@@ -87,20 +90,24 @@ const FeedbackList = ({ todoId }) => {
 
 export default FeedbackList;
 
-const StyleFeedbackGroup = styled.div``;
+const StyleFeedbackGroup = styled.div`
+  /* background-color: green; */
+`;
+  
 const AddButton = styled.button`
   cursor: pointer;
   border: none;
   background-color: white;
   width: auto;
-  margin-left: 8%;
-  margin-top: 2%;
 `;
 
 const InputContainer = styled.div`
   border-radius: 12px;
+  width: 80%;
+  height: 60px;
+  margin:0 auto;
   margin-top: 10px;
-  margin-left: 30px;
+  display: flex;
 `;
 
 const StyleContainer = styled.div`

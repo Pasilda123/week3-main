@@ -2,25 +2,29 @@
 import Button from "@mui/material/Button";
 import { GoCommentDiscussion } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
-import { useState } from "react";
-import { removeFeedback } from "../redux/modules/feedbackSlice";
+import { useEffect, useState } from "react";
+import { editFeedback, removeFeedback } from "../redux/modules/feedbackSlice";
 import { useDispatch } from "react-redux";
 /* import styled from "styled-components"; */
 
 const Feedbackfix = ({ feed }) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState(feed); // 작성자, 내용
+  useEffect(()=>{
+    setInput(feed)
+  }, [feed])
 
   const [newinput, setNewInput] = useState(feed); // 수정 작성자, 내용
 
   const updateFeedback = (e) => {
     e.preventDefault();
-    dispatch()
+    dispatch(editFeedback({id:feed.id, body: {name:newinput.name, feedback:newinput.feedback}})) 
     setNewInput({ id:Date.now(), name: "", feedback: "" });
+    setIsEdit(prev => !prev);
   }
 
-  const DeleteTodo = (id) => {
-    dispatch(removeFeedback(id));
+  const DeleteTodo = () => {
+    dispatch(removeFeedback(feed.id));
   };
 
   const handleChangeName = (e) => {
@@ -41,8 +45,8 @@ const Feedbackfix = ({ feed }) => {
     <div>
       {!isedit ? (
         <>
-          <div style={{ marginLeft: "25px" }}>작성자 : {input.name}</div>
-          <div style={{ marginLeft: "25px" }}>피드백 : {input.feedback}</div>
+          <div style={{ marginLeft: "25px" }}>작성자 : {feed.name}</div>
+          <div style={{ marginLeft: "25px" }}>피드백 : {feed.feedback}</div>
         </>
       ) : (
         <>
@@ -51,13 +55,14 @@ const Feedbackfix = ({ feed }) => {
             value={newinput.name}
             style={{ marginLeft: "25px" }}
           />
-
+          <div>
           <input
             onChange={handleChangeFeedBack}
             value={newinput.feedback}
             style={{ marginLeft: "25px" }}
           />
           <button onClick={updateFeedback}>완료</button>
+          </div>
         </>
       )}
       <Button
